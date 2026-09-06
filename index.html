@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وزنة — حاسبة وزنيات الشاهي الخليجي</title>
+<meta name="description" content="احسب وزنية الشاهي والسكر المناسبة لأكثر من 250 صنفاً، عبر ثلاثة أنظمة قياس مستقلة: إبريق صانع الشاهي (الموكا) والإبريق العادي بمصدرين موثّقين.">
+<meta property="og:title" content="وزنة — حاسبة وزنيات الشاهي الخليجي">
+<meta property="og:description" content="وزنية شاهيك بالغرام، مو بالحدس. 257 صنفاً عبر 3 أنظمة قياس مستقلة.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2317110B'/%3E%3Cpath d='M28 30h44l-6 46q-16 9-32 0z' fill='none' stroke='%23C17817' stroke-width='5'/%3E%3Ccircle cx='50' cy='55' r='16' fill='%23E8A94C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&family=Almarai:wght@400;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#calc" class="skip-link">تخطَّ إلى الحاسبة</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span> وزنة</a>
+    <nav class="desktop-nav">
+      <a href="#calc">الحاسبة</a>
+      <a href="#grades">دليل الدرجات</a>
+      <a href="#tips">نصائح التحضير</a>
+      <a href="#sources">المصادر</a>
+    </nav>
+    <button id="mobileNavToggle" class="mobile-nav-toggle" aria-label="فتح القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav id="mobileNav" class="mobile-nav" role="navigation" aria-label="روابط الجوال">
+    <a href="#calc">الحاسبة</a>
+    <a href="#grades">دليل الدرجات</a>
+    <a href="#tips">نصائح التحضير</a>
+    <a href="#sources">المصادر</a>
+  </nav>
+</div>
+
+<main id="top">
+  <div id="data-source-banner" class="data-banner" style="display:none"></div>
+
+  <!-- ============== HERO ============== -->
+  <section class="hero wrap hero-grid">
+    <div>
+      <div class="eyebrow">قزحة مضبوطة، مو تخمين</div>
+      <h1 class="display">شاهيك يستاهل <em>وزنة صح</em>، مو تقدير بالعين</h1>
+      <p class="sub">حاسبة وزنيات دقيقة لأكثر من 250 صنف شاهي متداول في السوق السعودي — تختار الصنف ونوع إبريقك وكمية الماء، وتطلع لك الوزنة بالغرام فوراً.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#calc">ابدأ الحساب الآن</a>
+        <a class="btn btn-ghost" href="#tips">نصائح التحضير</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><b>257</b><span>صنف شاهي مسجّل</span></div>
+        <div class="stat"><b>3</b><span>أنظمة قياس مستقلة</span></div>
+        <div class="stat"><b>17</b><span>درجة تصنيف ورق</span></div>
+      </div>
+    </div>
+
+    <div class="glass-stage">
+      <div class="glass-shell">
+        <svg viewBox="0 0 200 300" width="190" aria-hidden="true">
+          <defs>
+            <linearGradient id="teaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E8A94C"/>
+              <stop offset="100%" stop-color="#8A4B0F"/>
+            </linearGradient>
+            <clipPath id="glassClip">
+              <path d="M55 20 L145 20 L132 260 Q100 278 68 260 Z"/>
+            </clipPath>
+          </defs>
+          <!-- stream -->
+          <rect class="droplet" x="97" y="0" width="4" height="26" rx="2" fill="#E8A94C" opacity="0"/>
+          <!-- glass outline -->
+          <path d="M55 20 L145 20 L132 260 Q100 278 68 260 Z" fill="none" stroke="#3A2C1B" stroke-width="3"/>
+          <g clip-path="url(#glassClip)">
+            <rect id="pourGlassLiquid" x="55" y="230" width="90" height="60" fill="url(#teaGrad)"></rect>
+            <ellipse id="pourGlassFoam" cx="100" cy="230" rx="46" ry="9" fill="#F5E9D3" opacity="0"></ellipse>
+          </g>
+          <path d="M55 20 L145 20 L132 260 Q100 278 68 260 Z" fill="none" stroke="#3A2C1B" stroke-width="3"/>
+          <line x1="50" y1="20" x2="150" y2="20" stroke="#3A2C1B" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="glass-caption">تتحرك القزحة والوزنة مباشرة مع اختياراتك بالحاسبة — الوزنة الحالية: <b id="glassCaptionVal">—</b></div>
+    </div>
+  </section>
+
+  <!-- ============== WHY THREE SYSTEMS ============== -->
+  <section class="why wrap">
+    <div class="why-card">
+      <div class="why-cell">
+        <div class="tag">النظام 01</div>
+        <h3>إبريق صانع الشاهي (الموكا)</h3>
+        <p>68 صنفاً — إبريق 500 مل، 3 مستويات سكر بمدى أدنى/أعلى لكل مستوى.</p>
+      </div>
+      <div class="why-cell">
+        <div class="tag">النظام 02</div>
+        <h3>الإبريق العادي — 7AMDAN_LAB</h3>
+        <p>153 صنفاً — بيانات لكل لتر ماء، وزنية موصى بها واحدة + مدة تخدير.</p>
+      </div>
+      <div class="why-cell">
+        <div class="tag">النظام 03</div>
+        <h3>الإبريق العادي — ملك الشواهي</h3>
+        <p>36 صنفاً — لكل لتر، مع 3 درجات قوة (خفيفة/مناسبة/ثقيلة) ومدة تخدير.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CALCULATOR ============== -->
+  <section class="calc-section wrap" id="calc">
+    <div class="section-head">
+      <div class="eyebrow">الحاسبة</div>
+      <h2>اختر نظام إبريقك</h2>
+      <p>كل نظام مصدره مختلف تماماً عن الآخر، فما تُدمج أرقامها ببعض حتى لو تشابهت أسماء بعض الأصناف.</p>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" role="tab" aria-selected="true" data-tab="moka"><span class="swatch" style="background:#C17817"></span> إبريق صانع الشاهي (الموكا)</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="teapotA"><span class="swatch" style="background:#8A9B6E"></span> الإبريق العادي (7AMDAN_LAB)</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="teapotB"><span class="swatch" style="background:#C1572E"></span> الإبريق العادي (ملك الشواهي)</button>
+      <span id="dynamic-tabs-slot"></span>
+    </div>
+
+    <!-- ---- PANEL: MOKA ---- -->
+    <div class="calc-panel active" id="panel-moka">
+      <div class="card">
+        <div class="field">
+          <label for="moka-select">اسم الشاهي</label>
+          <div class="search-select" id="moka-search"></div>
+          <div class="suggest-row" id="moka-suggest"></div>
+          <div class="fav-chips" id="moka-favs"></div>
+        </div>
+        <div class="field">
+          <label>نوع الماء</label>
+          <div class="toggle-group" id="moka-water">
+            <button type="button" data-val="low" aria-pressed="true">تحلية / علب (100–120)</button>
+            <button type="button" data-val="high" aria-pressed="false">صنبور (120–160)</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>مستوى السكر</label>
+          <div class="toggle-group" id="moka-sugar">
+            <button type="button" data-val="nosugar" aria-pressed="false">بدون سكر</button>
+            <button type="button" data-val="medium" aria-pressed="true">وسط</button>
+            <button type="button" data-val="high" aria-pressed="false">حالي</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>كمية الماء (مل)</label>
+          <div class="amount-row" id="moka-amount">
+            <button class="chip" data-val="250">250</button>
+            <button class="chip" data-val="500" aria-pressed="true">500</button>
+            <button class="chip" data-val="750">750</button>
+            <button class="chip" data-val="1000">1000</button>
+            <div class="num-input stepper">
+              <button type="button" class="step-btn" data-dir="-1" aria-label="تقليل كمية الماء">−</button>
+              <input type="number" id="moka-amount-input" value="500" min="50" step="50">
+              <button type="button" class="step-btn" data-dir="1" aria-label="زيادة كمية الماء">+</button>
+              <span>مل</span>
+            </div>
+          </div>
+          <div class="hint" id="moka-cup-eq"></div>
+        </div>
+        <div class="field">
+          <label>تعديل يدوي (تقوية/تخفيف الشاهي)</label>
+          <div class="slider-row">
+            <span class="slider-val" id="moka-adj-val">0%</span>
+            <input type="range" id="moka-adj" min="-10" max="10" value="0" step="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="result-card" id="moka-result" aria-live="polite"></div>
+    </div>
+
+    <!-- ---- PANEL: TEAPOT A (7amdan) ---- -->
+    <div class="calc-panel" id="panel-teapotA">
+      <div class="card">
+        <div class="field">
+          <label for="teapotA-select">اسم الشاهي</label>
+          <div class="search-select" id="teapotA-search"></div>
+          <div class="suggest-row" id="teapotA-suggest"></div>
+          <div class="fav-chips" id="teapotA-favs"></div>
+        </div>
+        <div class="field">
+          <label>إضافة سكر؟</label>
+          <div class="toggle-group" id="teapotA-sugar">
+            <button type="button" data-val="yes" aria-pressed="true">نعم</button>
+            <button type="button" data-val="no" aria-pressed="false">بدون سكر</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>كمية الماء (مل)</label>
+          <div class="amount-row" id="teapotA-amount">
+            <button class="chip" data-val="500">500</button>
+            <button class="chip" data-val="1000" aria-pressed="true">1000</button>
+            <button class="chip" data-val="1500">1500</button>
+            <button class="chip" data-val="2000">2000</button>
+            <div class="num-input stepper">
+              <button type="button" class="step-btn" data-dir="-1" aria-label="تقليل كمية الماء">−</button>
+              <input type="number" id="teapotA-amount-input" value="1000" min="50" step="50">
+              <button type="button" class="step-btn" data-dir="1" aria-label="زيادة كمية الماء">+</button>
+              <span>مل</span>
+            </div>
+          </div>
+          <div class="hint" id="teapotA-cup-eq"></div>
+        </div>
+        <div class="field">
+          <label>تعديل يدوي (على الشاي فقط)</label>
+          <div class="slider-row">
+            <span class="slider-val" id="teapotA-adj-val">0%</span>
+            <input type="range" id="teapotA-adj" min="-10" max="10" value="0" step="1">
+          </div>
+        </div>
+      </div>
+      <div class="result-card" id="teapotA-result" aria-live="polite"></div>
+    </div>
+
+    <!-- ---- PANEL: TEAPOT B (shawahi) ---- -->
+    <div class="calc-panel" id="panel-teapotB">
+      <div class="card">
+        <div class="field">
+          <label for="teapotB-select">اسم الشاهي</label>
+          <div class="search-select" id="teapotB-search"></div>
+          <div class="suggest-row" id="teapotB-suggest"></div>
+          <div class="fav-chips" id="teapotB-favs"></div>
+        </div>
+        <div class="field">
+          <label>درجة القوة</label>
+          <div class="toggle-group" id="teapotB-strength">
+            <button type="button" data-val="nosugar" aria-pressed="false">بدون سكر</button>
+            <button type="button" data-val="light" aria-pressed="false">خفيفة</button>
+            <button type="button" data-val="medium" aria-pressed="true">مناسبة (وسط)</button>
+            <button type="button" data-val="heavy" aria-pressed="false">ثقيلة (نقيلة)</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>كمية الماء (مل)</label>
+          <div class="amount-row" id="teapotB-amount">
+            <button class="chip" data-val="500">500</button>
+            <button class="chip" data-val="1000" aria-pressed="true">1000</button>
+            <button class="chip" data-val="1500">1500</button>
+            <button class="chip" data-val="2000">2000</button>
+            <div class="num-input stepper">
+              <button type="button" class="step-btn" data-dir="-1" aria-label="تقليل كمية الماء">−</button>
+              <input type="number" id="teapotB-amount-input" value="1000" min="50" step="50">
+              <button type="button" class="step-btn" data-dir="1" aria-label="زيادة كمية الماء">+</button>
+              <span>مل</span>
+            </div>
+          </div>
+          <div class="hint" id="teapotB-cup-eq"></div>
+        </div>
+        <div class="field">
+          <label>تعديل يدوي (على الشاي فقط)</label>
+          <div class="slider-row">
+            <span class="slider-val" id="teapotB-adj-val">0%</span>
+            <input type="range" id="teapotB-adj" min="-10" max="10" value="0" step="1">
+          </div>
+        </div>
+      </div>
+      <div class="result-card" id="teapotB-result" aria-live="polite"></div>
+    </div>
+
+    <div id="dynamic-panels-slot"></div>
+  </section>
+
+  <!-- ============== GRADES GLOSSARY ============== -->
+  <section class="grades-section wrap" id="grades">
+    <div class="section-head">
+      <div class="eyebrow">مرجع</div>
+      <h2>دليل درجات أوراق الشاهي</h2>
+      <p>18 رمزاً تصنيفياً (OP، BOP، FBOP1...) يصف حجم ورقة الشاهي وشكلها، وليس نكهة ثابتة — ويؤثر على سرعة الاستخلاص وقوة اللون واحتمالية المرارة. مصادر: مقال أسس الزاد وملصق بيت الشاي.</p>
+    </div>
+    <div class="grades-grid" id="grades-grid"></div>
+  </section>
+
+  <!-- ============== TIPS ============== -->
+  <section class="tips wrap" id="tips">
+    <div class="section-head">
+      <div class="eyebrow">من أهل الخبرة</div>
+      <h2>نصائح قبل ما تصبّ</h2>
+    </div>
+    <div class="tips-grid">
+      <div class="tip"><div class="n">01</div><p>الشاهي لا يُغلى على النار مباشرة — يُخدّر بعد وصول الماء لدرجة قريبة من الغليان.</p></div>
+      <div class="tip"><div class="n">02</div><p>الشاهي لا يُغسل قبل التخدير — يفقد الطعم والرائحة.</p></div>
+      <div class="tip"><div class="n">03</div><p>تجنّب تحريك أوراق الشاهي بعد التخدير حتى لا تزيد المرارة.</p></div>
+      <div class="tip"><div class="n">04</div><p>اختر ماءً بأملاح بين 100–150 لأفضل استخلاص، وسكراً خشناً دائماً.</p></div>
+    </div>
+  </section>
+
+  <!-- ============== SOURCES / FOOTER ============== -->
+  <footer id="sources">
+    <div class="wrap">
+      <p class="src-list">المصادر: مصدر الشاي (المطارة الأصلية) · @7AMDAN_LAB · ملك الشواهي @aboabdelh98 (بيت الشاي) · تصنيفات أسس الزاد وبيت الشاي لدرجات الأوراق. الأرقام المقدَّرة موسومة بوضوح وتحتاج قياساً فعلياً قبل الاعتماد التجاري الكامل.</p>
+      <p>وزنة © نسخة أولى — أداة مرجعية غير رسمية · <a href="admin.html" style="color:var(--muted)">لوحة التحكم</a></p>
+    </div>
+  </footer>
+
+</main>
+
+<script src="pb-loader.js"></script>
+</body>
+</html>
