@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم وزنة</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&family=Almarai:wght@400;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ============== شاشة الدخول ============== -->
+<div id="loginScreen" class="admin-login-wrap">
+  <div class="admin-login-card">
+    <div class="brand" style="justify-content:center;margin-bottom:22px"><span class="dot"></span> لوحة تحكم وزنة</div>
+    <p class="login-hint">سجّل دخول بحساب الأدمن (Superuser). في وضع BFF الآمن تبقى جلسة PocketBase على الخادم داخل Cookie محمية ولا تُحفظ في JavaScript.</p>
+    <div class="field">
+      <label>رابط بوابة الإدارة الآمنة (BFF)</label>
+      <input type="url" id="pbUrlInput" placeholder="https://admin-api.waznah.com" autocomplete="url">
+      <p class="login-hint" style="margin-top:6px">في الإنتاج استخدم رابط Cloudflare Worker المخصص للإدارة، وليس رابط PocketBase مباشرة.</p>
+    </div>
+    <div class="field">
+      <label>الإيميل</label>
+      <input type="email" id="loginEmail" autocomplete="username">
+    </div>
+    <div class="field">
+      <label>كلمة المرور</label>
+      <input type="password" id="loginPassword" autocomplete="current-password">
+    </div>
+    <button class="btn btn-primary" id="loginBtn" style="width:100%;justify-content:center">دخول</button>
+    <p id="loginError" class="login-error" style="display:none"></p>
+  </div>
+</div>
+
+<!-- ============== لوحة التحكم ============== -->
+<div id="adminApp" style="display:none">
+  <div class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#"><span class="dot"></span> لوحة تحكم وزنة</a>
+      <div style="display:flex;align-items:center;gap:14px">
+        <a href="index.html" class="btn btn-ghost" style="padding:8px 16px;font-size:13px">↩ رجوع للموقع</a>
+        <button id="logoutBtn" class="btn btn-ghost" style="padding:8px 16px;font-size:13px">خروج</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap admin-main">
+    <div class="admin-layout">
+      <!-- ---- الشريط الجانبي ---- -->
+      <aside class="admin-sidebar">
+        <div class="sidebar-title">الأنظمة</div>
+        <nav id="systemsNav" class="sidebar-nav"></nav>
+        <button id="newSystemBtn" class="btn btn-ghost sidebar-add-btn">+ نظام إبريق/مصدر جديد</button>
+        <div class="sidebar-title" style="margin-top:22px">أخرى</div>
+        <nav class="sidebar-nav">
+          <button class="sidebar-link" data-view="grades">درجات الأوراق</button>
+        </nav>
+      </aside>
+
+      <!-- ---- منطقة المحتوى ---- -->
+      <section class="admin-content">
+        <div id="viewTeas">
+          <div class="admin-content-head">
+            <h2 id="teasTitle">الأصناف</h2>
+            <div style="display:flex;gap:10px;align-items:center">
+              <input type="text" id="teasSearch" placeholder="بحث بالاسم..." class="admin-search">
+              <button id="addTeaBtn" class="btn btn-primary">+ إضافة صنف</button>
+            </div>
+          </div>
+          <div id="teasStatus" class="admin-status"></div>
+          <div class="admin-table-wrap">
+            <table class="admin-table" id="teasTable">
+              <thead><tr id="teasTableHead"></tr></thead>
+              <tbody id="teasTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="viewGrades" style="display:none">
+          <div class="admin-content-head">
+            <h2>درجات الأوراق</h2>
+            <button id="addGradeBtn" class="btn btn-primary">+ إضافة درجة</button>
+          </div>
+          <div id="gradesStatus" class="admin-status"></div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>الرمز</th><th>الاسم الكامل</th><th>موثّق؟</th><th></th></tr></thead>
+              <tbody id="gradesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<!-- ============== نافذة إضافة/تعديل صنف ============== -->
+<div id="teaModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="teaModalTitle">إضافة صنف</h3>
+      <button class="modal-close" data-close>✕</button>
+    </div>
+    <form id="teaForm" class="modal-body"></form>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" data-close>إلغاء</button>
+      <button type="submit" form="teaForm" class="btn btn-primary" id="teaSaveBtn">حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== نافذة نظام جديد ============== -->
+<div id="systemModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>نظام إبريق/مصدر جديد</h3>
+      <button class="modal-close" data-close>✕</button>
+    </div>
+    <form id="systemForm" class="modal-body">
+      <div class="field">
+        <label>اسم النظام (يظهر بالتبويب)</label>
+        <input type="text" id="sysLabel" required placeholder="مثال: الإبريق العادي — مصدر جديد">
+      </div>
+      <div class="field">
+        <label>اسم المصدر (للتوثيق فقط)</label>
+        <input type="text" id="sysSourceName" placeholder="مثال: @account_name">
+      </div>
+      <div class="field">
+        <label>الشكل الحسابي</label>
+        <select id="sysShape" required>
+          <option value="range3tier">مدى ثلاثي حسب مستوى السكر (زي إبريق الموكا) — إبريق بحجم مرجعي ثابت، 3 مستويات سكر بمدى أدنى/أعلى</option>
+          <option value="single">قيمة واحدة لكل لتر (زي 7AMDAN_LAB) — وزنية موصى بها واحدة + سكر + مدة تخدير</option>
+          <option value="tiered_sugar">مدى ثلاثي مع نطاق سكر منفصل (زي ملك الشواهي) — 3 درجات قوة، كل درجة فيها مدى شاهي ومدى سكر منفصلين</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>لون التبويب</label>
+        <input type="color" id="sysColor" value="#4E8A7A" style="height:44px;padding:4px">
+      </div>
+      <p class="hint" style="margin-top:6px">بعد الحفظ، ينشئ النظام كولكشن جديد بـPocketBase تلقائياً بنفس الشكل المختار، ويظهر كتبويب كامل بالموقع مباشرة.</p>
+    </form>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" data-close>إلغاء</button>
+      <button type="submit" form="systemForm" class="btn btn-primary">إنشاء النظام</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== نافذة إضافة/تعديل درجة ============== -->
+<div id="gradeModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="gradeModalTitle">إضافة درجة</h3>
+      <button class="modal-close" data-close>✕</button>
+    </div>
+    <form id="gradeForm" class="modal-body">
+      <div class="field"><label>الرمز</label><input type="text" id="gCode" required></div>
+      <div class="field"><label>الاسم الكامل</label><input type="text" id="gFull"></div>
+      <div class="field"><label>نوع التصنيف</label><input type="text" id="gCat"></div>
+      <div class="field"><label>حجم الورقة</label><input type="text" id="gSize"></div>
+      <div class="field"><label>سرعة الاستخلاص</label><input type="text" id="gSpeed"></div>
+      <div class="field"><label>قوة اللون</label><input type="text" id="gColor"></div>
+      <div class="field"><label>احتمالية المرارة</label><input type="text" id="gBitter"></div>
+      <div class="field"><label>الاستخدام المثالي</label><input type="text" id="gUse"></div>
+      <div class="field"><label>مدة النقع</label><input type="text" id="gBrew"></div>
+      <div class="field"><label><input type="checkbox" id="gVerified" style="width:auto"> موثّق من مصدر أساسي</label></div>
+      <div class="field"><label>وصف مختصر</label><textarea id="gDesc" rows="2"></textarea></div>
+      <div class="field"><label>أمثلة</label><textarea id="gExamples" rows="2"></textarea></div>
+    </form>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" data-close>إلغاء</button>
+      <button type="submit" form="gradeForm" class="btn btn-primary">حفظ</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
