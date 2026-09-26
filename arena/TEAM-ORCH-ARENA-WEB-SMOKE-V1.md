@@ -15,61 +15,10 @@ This file contains only the curated source material explicitly approved for exte
 - 07. tests/realtime.test.ts
 - 08. tests/realtime.integration.test.ts
 
-## Review prompt
+## Review instructions
 
-# TEAM-ORCH-ARENA-WEB-SMOKE-V1
-
-You are one of two independent models selected explicitly in Arena Web Side-by-Side mode.
-
-This is a non-blocking browser-pipeline smoke test against the already completed Classic Gate D
-realtime implementation. Do not modify code and do not claim that this review changes the
-existing Gate D decision.
-
-Review only the exact source_ref supplied in the source bundle.
-
-Focus on:
-
-- HELLO authentication before subscription
-- PostgreSQL-derived role authority
-- Host / Player / Display projection secrecy
-- process-local realtime registry behavior
-- reconnect/disconnect status behavior within the supplied scope
-- strict Gate D versus Gate E/F boundary
-- whether the supplied tests support the implementation claims
-
-Return exactly one self-contained Markdown report:
-
-# TEAM-ORCH-ARENA-WEB-SMOKE-V1 worker report
-
-## Reviewed source
-
-State the exact reviewed source_ref.
-
-## Result
-
-APPROVED or CHANGES REQUESTED
-
-## Findings
-
-- P0: ...
-- P1: ...
-- P2: ...
-- P3: ...
-
-## Evidence
-
-Cite exact supplied files/functions/tests.
-
-## Scope assessment
-
-State whether the compact source bundle was sufficient for this smoke review.
-
-## Handoff to ChatGPT
-
-State that this is a supplemental, non-blocking Arena Web review and that ChatGPT must
-compare both model outputs against the exact source before taking any action.
-
-
+The final review prompt is intentionally not embedded in this public source bundle.
+It is delivered separately by the Arena worker only after source delivery is complete.
 
 ---
 
